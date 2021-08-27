@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- Website Metadata/Setup -->
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Linking Bootstrap HTML/CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        <link href="stylesheets.css" rel="stylesheet" text="text/css" />
+
+        <title>Weather App</title>
+
+    </head>
+
+    <!-- Website Content -->
+    <body>
+
+        <!-- Linking Bootstrap Javascript Functions -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+        <!-- HTML Content -->
+
+        <div class="container-fluid fill p-0">
+
+          <header class="p-3 bg-dark text-white">
+            <div class="container">
+              <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+          
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                  <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+                  <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+                  <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+                  <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                  <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                </ul>
+          
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                  <input type="search" class="form-control form-control-dark" placeholder="Search...">
+                </form>
+          
+                <div class="text-end">
+                  <button type="button" class="btn btn-outline-light me-2">Login</button>
+                  <button type="button" class="btn btn-warning">Sign-up</button>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div id="content" class="container-fluid p-5">
+
+            <!-- Grid full of the user input for calling the weather API -->
+            <div class="container-fluid">
+
+              <div class="row border">
+
+                <div class="row col">
+
+                  <!-- Country Selection -->
+                  <div class="col p-0">
+                    <div class="input-group fill">
+                      <select id="country-select" class="custom-select p-2 fill">
+                        <option value="default" selected>Country</option>
+                        <!-- Fill other options based off of supported countries in API or Database -->                        
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- State Selection -->
+                  <div class="col p-0">
+                    <div class="input-group fill">
+                      <select id="state-select" class="custom-select fill">
+                        <option value="default" selected>State</option>
+                        <!-- Fill other options based off of Country (previous custom select) -->
+                        <!-- Also don't have any choices unless Country has been chosen, and deselect state if you deselect parent choices -->
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- City Selection -->
+                  <div class="col p-0">
+                    <div class="input-group fill">
+                      <select id="city-select" class="custom-select fill">
+                        <option value="default" selected>City</option>
+                        <!-- Fill other options based off of State (previous custom select) -->
+                        <!-- Also don't have any choices unless State has been chosen, and deselect city if you deselect parent choices -->
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row col">
+
+                  <div class="col p-0">
+                    <input type="text" id="country-select-readonly" class="form-control fill" placeholder="Country" aria-label="readonly input country" aria-describedby="basic-addon1" readonly>
+                  </div>
+
+                  <div class="col p-0">
+                    <input type="text" id="state-select-readonly" class="form-control fill" placeholder="State" aria-label="readonly input state" aria-describedby="basic-addon1" readonly>
+                  </div>
+
+                  <div class="col p-0">
+                    <input type="text" id="city-select-readonly" class="form-control fill" placeholder="City" aria-label="readonly input city" aria-describedby="basic-addon1" readonly>
+                  </div>
+                  
+                </div>
+
+              </div> 
+              
+              <div class="row border">
+
+                <div class="row col">
+
+                  <div class="col p-0">
+                    <input type="text" id="latitude-input" class="form-control fill" placeholder="Latitude" min="-90" max="90" aria-label="input country" aria-describedby="basic-addon1">
+                  </div>
+  
+                  <div class="col p-0">
+                    <input type="text" id="longitude-input" class="form-control fill" placeholder="Longitude" min="-180" max="180" aria-label="input state" aria-describedby="basic-addon1">
+                  </div>
+  
+                </div>
+
+                <div class="row col">
+
+                  <div class="col p-0">
+                    <input type="text" id="latitude-input-readonly" class="form-control fill" placeholder="Latitude" min="-90" max="90" aria-label="readonly input country" aria-describedby="basic-addon1" readonly>
+                  </div>
+  
+                  <div class="col p-0">
+                    <input type="text" id="longitude-input-readonly" class="form-control fill" placeholder="Longitude" min="-180" max="180" aria-label="readonly input state" aria-describedby="basic-addon1" readonly>
+                  </div>
+
+                </div>
+
+              </div> 
+              
+              <div class="row border">
+
+                <div class="row no-gutter col fill">
+
+                  <div class="col p-0">
+                    <button id="btnTestAPI" type="button" class="btn btn-outline-primary fill">Test</button>
+                  </div>
+                  
+                  <div class="col p-0">
+                    <button id="btnCityDataGPS" type="button" class="btn btn-outline-primary fill">City Data (GPS)</button>
+                  </div> 
+
+                  <div class="col p-0">
+                    <button id="btnCityData" type="button" class="btn btn-outline-primary fill">City Data</button>
+                  </div> 
+
+                </div>
+
+              </div>
+
+            </div>
+            
+            <!-- Google Map -->
+            <div id="map" class="container-fluid border">
+
+            </div>
+
+          </div>
+
+          <!-- Weather/Pollution Data (Consider having a slide to show each tab <Carousel>) -->
+          <div id="content" class="container-fluid fill p-5">
+
+            <!-- Temporary Easy UI -->
+
+            <div class="">
+
+              <!-- Timestamp -->
+              <div class="row border">
+
+                <!-- Header -->
+                <div class="col p-0">
+                  <p class="h1">Timestamp:</p>
+                </div>
+
+                <!-- Value -->
+                <div class="col p-0">
+                  <p id="air_visual_ts" class="font-weight-normal"></p>
+                </div>
+
+              </div>
+
+              <!-- Temperature (Celsius) -->
+              <div class="row border">
+
+                <!-- Header -->
+                <div class="col p-0">
+                  <p class="h1">Temperature:</p>
+                </div>
+
+                <!-- Value -->
+                <div class="col p-0">
+                  <p id="air_visual_tp" class="font-weight-normal"></p>
+                </div>
+
+              </div>
+
+              <!-- Atmospheric Pressure -->
+              <div class="row border">
+
+                <!-- Header -->
+                <div class="col p-0">
+                  <p class="h1">Atmospheric Pressure:</p>
+                </div>
+
+                <!-- Value -->
+                <div class="col p-0">
+                  <p id="air_visual_pr" class="font-weight-normal"></p>
+                </div>
+
+              </div>
+
+              <!-- Humidity -->
+            <div class="row border">
+
+              <!-- Header -->
+              <div class="col p-0">
+                <p class="h1">Humidity:</p>
+              </div>
+
+              <!-- Value -->
+              <div class="col p-0">
+                <p id="air_visual_hu" class="font-weight-normal"></p>
+              </div>
+
+            </div>
+
+            <!-- Wind Speed -->
+            <div class="row border">
+
+              <!-- Header -->
+              <div class="col p-0">
+                <p class="h1">Wind Speed:</p>
+              </div>
+
+              <!-- Value -->
+              <div class="col p-0">
+                <p id="air_visual_ws" class="font-weight-normal"></p>
+              </div>
+
+            </div>
+
+            <!-- Wind Directions -->
+            <div class="row border">
+
+              <!-- Header -->
+              <div class="col p-0">
+                <p class="h1">Wind Direction:</p>
+              </div>
+
+              <!-- Value -->
+              <div class="col p-0">
+                <p id="air_visual_wd" class="font-weight-normal"></p>
+              </div>
+
+            </div>
+
+            <!-- Weather Icon Code -->
+            <div class="row border">
+
+              <!-- Header -->
+              <div class="col p-0">
+                <p class="h1">Weather Icon Code:</p>
+              </div>
+
+              <!-- Value -->
+              <div class="col p-0">
+                <p id="air_visual_ic" class="font-weight-normal"></p>
+              </div>
+
+            </div>
+
+            </div>
+
+            <!-- Create a UI for displaying Weather & Pollution -->
+
+          </div>
+
+        </div>
+
+    </body>
+
+    <!-- Website Javascript -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script> --> <!-- Auth --> 
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script> <!-- Database --> 
+
+    <script src="scripts.js" type="module"></script>
+
+
+</html>
